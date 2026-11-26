@@ -1,0 +1,123 @@
+
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="900" height="500"
+         viewBox="0 0 900 500">
+
+        <rect width="100%" height="100%" fill="white"/>
+
+        <g font-family="Arial, sans-serif">
+            
+    <text x="450" y="35" text-anchor="middle"
+          font-size="24" font-weight="bold">
+        Accuracy Comparison
+    </text>
+    
+        <line x1="90" y1="400"
+              x2="850" y2="400"
+              stroke="#e2e8f0"/>
+
+        <text x="78" y="404"
+              text-anchor="end" font-size="12">
+            0%
+        </text>
+        
+        <line x1="90" y1="340"
+              x2="850" y2="340"
+              stroke="#e2e8f0"/>
+
+        <text x="78" y="344"
+              text-anchor="end" font-size="12">
+            20%
+        </text>
+        
+        <line x1="90" y1="280"
+              x2="850" y2="280"
+              stroke="#e2e8f0"/>
+
+        <text x="78" y="284"
+              text-anchor="end" font-size="12">
+            40%
+        </text>
+        
+        <line x1="90" y1="220"
+              x2="850" y2="220"
+              stroke="#e2e8f0"/>
+
+        <text x="78" y="224"
+              text-anchor="end" font-size="12">
+            60%
+        </text>
+        
+        <line x1="90" y1="160"
+              x2="850" y2="160"
+              stroke="#e2e8f0"/>
+
+        <text x="78" y="164"
+              text-anchor="end" font-size="12">
+            80%
+        </text>
+        
+        <line x1="90" y1="100"
+              x2="850" y2="100"
+              stroke="#e2e8f0"/>
+
+        <text x="78" y="104"
+              text-anchor="end" font-size="12">
+            100%
+        </text>
+        
+        <rect x="155" y="235.80705009999997"
+              width="140" height="164.19294990000003"
+              fill="#94a3b8" rx="4"/>
+
+        <text x="225" y="223.80705009999997"
+              text-anchor="middle"
+              font-size="18" font-weight="bold">
+            54.73%
+        </text>
+
+        <text x="225" y="430"
+              text-anchor="middle" font-size="14">
+            Initial Accuracy
+        </text>
+        
+        <rect x="395" y="102.22634509"
+              width="140" height="297.77365491"
+              fill="#2563eb" rx="4"/>
+
+        <text x="465" y="90.22634509"
+              text-anchor="middle"
+              font-size="18" font-weight="bold">
+            99.26%
+        </text>
+
+        <text x="465" y="430"
+              text-anchor="middle" font-size="14">
+            Training Accuracy
+        </text>
+        
+        <rect x="635" y="102.22222222000005"
+              width="140" height="297.77777777999995"
+              fill="#16a34a" rx="4"/>
+
+        <text x="705" y="90.22222222000005"
+              text-anchor="middle"
+              font-size="18" font-weight="bold">
+            99.26%
+        </text>
+
+        <text x="705" y="430"
+              text-anchor="middle" font-size="14">
+            Test Accuracy
+        </text>
+        
+    <text x="25" y="250"
+          transform="rotate(-90 25 250)"
+          text-anchor="middle" font-size="15">
+        Accuracy (%)
+    </text>
+    
+        </g>
+
+    </svg>
+    
