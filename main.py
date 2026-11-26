@@ -1,5 +1,6 @@
 import numpy as np
 from neural_network import NeuralNetwork
+from evaluation import evaluate_model
 
 # Load dataset
 data = np.loadtxt(
@@ -246,3 +247,87 @@ print(f"Initial accuracy: {initial_accuracy * 100:.2f}%")
 print(f"Final training accuracy: {train_accuracy * 100:.2f}%")
 
 print("Recorded loss values:", len(loss_history))
+
+# Evaluate model on test data
+print("\nTest evaluation:")
+
+test_outputs = model.forward(X_test)
+
+test_predictions = model.predict(X_test)
+
+test_loss = model.mse(y_test, test_outputs)
+
+# Calculate performance metrics
+metrics = evaluate_model(
+    y_test,
+    test_predictions
+)
+
+print(f"Test MSE: {test_loss:.6f}")
+print(f"Test accuracy: {metrics['accuracy'] * 100:.2f}%")
+print(f"Precision: {metrics['precision'] * 100:.2f}%")
+print(f"Recall: {metrics['recall'] * 100:.2f}%")
+print(f"F1-score: {metrics['f1_score'] * 100:.2f}%")
+
+# Display confusion matrix
+print("\nConfusion matrix:")
+print(metrics["confusion_matrix"])
+
+tn, fp, fn, tp = metrics["confusion_matrix"].ravel()
+
+print("\nConfusion matrix details:")
+print("True negatives:", tn)
+print("False positives:", fp)
+print("False negatives:", fn)
+print("True positives:", tp)
+
+# Correct and incorrect predictions
+print("\nPrediction summary:")
+print("Total test samples:", len(y_test))
+print("Correct predictions:", tp + tn)
+print("Incorrect predictions:", fp + fn)
+
+# Compare training and test accuracy
+accuracy_gap = (
+    train_accuracy - metrics["accuracy"]
+) * 100
+
+print("\nTraining and test comparison:")
+print(f"Training accuracy: {train_accuracy * 100:.2f}%")
+print(f"Test accuracy: {metrics['accuracy'] * 100:.2f}%")
+print(f"Accuracy gap: {accuracy_gap:.2f} percentage points")
+
+# Compare actual and predicted values
+print("\nFirst 10 test predictions:")
+
+print("Actual | Output   | Predicted")
+
+for i in range(10):
+
+    actual = int(y_test[i, 0])
+    output = test_outputs[i, 0]
+    predicted = int(test_predictions[i, 0])
+
+    print(
+        f"{actual:6d} | "
+        f"{output:.6f} | "
+        f"{predicted:9d}"
+    )
+
+# Check duplicate records
+unique_rows = np.unique(data, axis=0)
+
+duplicate_count = len(data) - len(unique_rows)
+
+print("\nDuplicate record analysis:")
+print("Total records:", len(data))
+print("Unique records:", len(unique_rows))
+print("Duplicate records:", duplicate_count)
+
+# Check identical records across train and test sets
+train_rows = set(map(tuple, data[train_indices]))
+test_rows = set(map(tuple, data[test_indices]))
+
+shared_rows = train_rows.intersection(test_rows)
+
+print("Identical records across train and test:", len(shared_rows))
