@@ -156,3 +156,48 @@ initial_accuracy = np.mean(
 )
 
 print("Initial accuracy:", initial_accuracy * 100, "%")
+
+# Test backpropagation
+print("\nBackpropagation test:")
+
+# Save initial weights
+old_W1 = model.W1.copy()
+old_W2 = model.W2.copy()
+
+# Forward propagation before update
+predictions_before = model.forward(X_train)
+
+loss_before = model.mse(
+    y_train, predictions_before
+)
+
+# Perform one backward propagation
+model.backward(X_train, y_train)
+
+# Forward propagation after update
+predictions_after = model.forward(X_train)
+
+loss_after = model.mse(
+    y_train, predictions_after
+)
+
+print("Loss before update:", loss_before)
+print("Loss after update:", loss_after)
+print("Loss reduction:", loss_before - loss_after)
+
+print("\nWeight update check:")
+
+print(
+    "W1 changed:",
+    not np.array_equal(old_W1, model.W1)
+)
+
+print(
+    "W2 changed:",
+    not np.array_equal(old_W2, model.W2)
+)
+
+print(
+    "Loss decreased:",
+    loss_after < loss_before
+)

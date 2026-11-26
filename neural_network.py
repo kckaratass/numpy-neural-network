@@ -54,3 +54,33 @@ class NeuralNetwork:
     @staticmethod
     def mse(y_true, y_pred):
         return np.mean((y_true - y_pred) ** 2)
+
+    def backward(self, X, y):
+
+        m = X.shape[0]
+
+        # Output layer gradients
+        dZ2 = (
+            (2 / m)
+            * (self.A2 - y)
+            * self.sigmoid_derivative(self.A2)
+        )
+
+        dW2 = np.dot(self.A1.T, dZ2)
+        db2 = np.sum(dZ2, axis=0, keepdims=True)
+
+        # Hidden layer gradients
+        dZ1 = (
+            np.dot(dZ2, self.W2.T)
+            * self.sigmoid_derivative(self.A1)
+        )
+
+        dW1 = np.dot(X.T, dZ1)
+        db1 = np.sum(dZ1, axis=0, keepdims=True)
+
+        # Update weights and biases
+        self.W1 -= self.learning_rate * dW1
+        self.b1 -= self.learning_rate * db1
+
+        self.W2 -= self.learning_rate * dW2
+        self.b2 -= self.learning_rate * db2
