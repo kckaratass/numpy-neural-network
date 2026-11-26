@@ -1,0 +1,10 @@
+metric,value
+Initial Accuracy,0.5473098330
+Training Accuracy,0.9925788497
+Test Accuracy,0.9925925926
+Precision,0.9918032787
+Recall,0.9918032787
+F1-Score,0.9918032787
+Initial MSE,0.2506928172
+Training MSE,0.0088670244
+Test MSE,0.0085868657

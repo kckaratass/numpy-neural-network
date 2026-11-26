@@ -1,7 +1,7 @@
 import numpy as np
 from neural_network import NeuralNetwork
 from evaluation import evaluate_model
-
+from save_results import save_results
 
 # Load original dataset
 raw_data = np.loadtxt(
@@ -402,4 +402,17 @@ shared_features = train_features.intersection(
 print(
     "Identical input features across train and test:",
     len(shared_features)
+)
+# Save experiment results
+save_results(
+    loss_history=loss_history,
+    y_test=y_test,
+    test_outputs=test_outputs,
+    test_predictions=test_predictions,
+    metrics=metrics,
+    initial_accuracy=initial_accuracy,
+    train_accuracy=train_accuracy,
+    initial_loss=initial_loss,
+    train_loss=train_loss,
+    test_loss=test_loss
 )
