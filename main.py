@@ -123,3 +123,36 @@ print("\nSigmoid test:")
 print("Sigmoid(-2):", model.sigmoid(-2))
 print("Sigmoid(0):", model.sigmoid(0))
 print("Sigmoid(2):", model.sigmoid(2))
+
+# Reshape target arrays
+y_train = y_train.reshape(-1, 1)
+y_test = y_test.reshape(-1, 1)
+
+# Forward propagation
+predictions = model.forward(X_train)
+
+print("\nForward propagation results:")
+print("Z1 shape:", model.Z1.shape)
+print("A1 shape:", model.A1.shape)
+print("Z2 shape:", model.Z2.shape)
+print("A2 shape:", model.A2.shape)
+
+print("\nFirst 5 predictions:")
+print(predictions[:5])
+
+print("\nFirst 5 actual values:")
+print(y_train[:5])
+
+# Calculate initial loss
+initial_loss = model.mse(y_train, predictions)
+
+print("\nInitial MSE:", initial_loss)
+
+# Calculate initial accuracy
+predicted_classes = (predictions >= 0.5).astype(int)
+
+initial_accuracy = np.mean(
+    predicted_classes == y_train
+)
+
+print("Initial accuracy:", initial_accuracy * 100, "%")

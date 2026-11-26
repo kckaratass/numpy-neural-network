@@ -38,3 +38,19 @@ class NeuralNetwork:
     @staticmethod
     def sigmoid_derivative(a):
         return a * (1 - a)
+
+    def forward(self, X):
+
+        # Hidden layer
+        self.Z1 = np.dot(X, self.W1) + self.b1
+        self.A1 = self.sigmoid(self.Z1)
+
+        # Output layer
+        self.Z2 = np.dot(self.A1, self.W2) + self.b2
+        self.A2 = self.sigmoid(self.Z2)
+
+        return self.A2
+
+    @staticmethod
+    def mse(y_true, y_pred):
+        return np.mean((y_true - y_pred) ** 2)
