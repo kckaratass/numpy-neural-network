@@ -30,6 +30,9 @@ class NeuralNetwork:
         self.b1 = np.zeros((1, hidden_size))
         self.b2 = np.zeros((1, output_size))
 
+        # Store training loss
+        self.loss_history = []
+
     @staticmethod
     def sigmoid(z):
         z = np.clip(z, -500, 500)
@@ -84,3 +87,44 @@ class NeuralNetwork:
 
         self.W2 -= self.learning_rate * dW2
         self.b2 -= self.learning_rate * db2
+
+    def train(self, X, y, epochs=5000):
+
+        self.loss_history = []
+
+        # Record initial loss at epoch 0
+        predictions = self.forward(X)
+        initial_loss = self.mse(y, predictions)
+
+        self.loss_history.append(initial_loss)
+
+        print(f"Epoch 0 - Loss: {initial_loss:.6f}")
+
+        for epoch in range(1, epochs + 1):
+
+            # Backward propagation
+            self.backward(X, y)
+
+            # Forward propagation with updated weights
+            predictions = self.forward(X)
+
+            # Calculate loss
+            loss = self.mse(y, predictions)
+
+            # Store loss
+            self.loss_history.append(loss)
+
+            # Print training progress
+            if epoch % 500 == 0:
+                print(
+                    f"Epoch {epoch}/{epochs} "
+                    f"- Loss: {loss:.6f}"
+                )
+
+        return self.loss_history
+
+    def predict(self, X):
+
+        predictions = self.forward(X)
+
+        return (predictions >= 0.5).astype(int)

@@ -201,3 +201,48 @@ print(
     "Loss decreased:",
     loss_after < loss_before
 )
+
+# Reinitialize model before training
+model = NeuralNetwork(
+    input_size=X_train.shape[1],
+    hidden_size=8,
+    output_size=1,
+    learning_rate=0.1,
+    seed=42
+)
+
+# Train neural network
+print("\nModel training started:\n")
+
+loss_history = model.train(
+    X_train,
+    y_train,
+    epochs=5000
+)
+
+print("\nModel training completed.")
+
+# Evaluate training performance
+train_outputs = model.forward(X_train)
+train_loss = model.mse(y_train, train_outputs)
+
+train_predictions = model.predict(X_train)
+
+train_accuracy = np.mean(
+    train_predictions == y_train
+)
+
+# Calculate loss improvement
+loss_reduction = (
+    (initial_loss - train_loss) / initial_loss
+) * 100
+
+print("\nTraining results:")
+print(f"Initial MSE: {initial_loss:.6f}")
+print(f"Final MSE: {train_loss:.6f}")
+print(f"MSE reduction: {loss_reduction:.2f}%")
+
+print(f"Initial accuracy: {initial_accuracy * 100:.2f}%")
+print(f"Final training accuracy: {train_accuracy * 100:.2f}%")
+
+print("Recorded loss values:", len(loss_history))
