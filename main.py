@@ -1,4 +1,5 @@
 import numpy as np
+from neural_network import NeuralNetwork
 
 # Load dataset
 data = np.loadtxt(
@@ -92,3 +93,33 @@ print(np.std(X_test, axis=0))
 
 print("\nFirst 5 standardized training samples:")
 print(X_train[:5])
+
+# Initialize neural network
+model = NeuralNetwork(
+    input_size=X_train.shape[1],
+    hidden_size=8,
+    output_size=1,
+    learning_rate=0.1,
+    seed=42
+)
+
+print("\nNeural network architecture:")
+print("W1 shape:", model.W1.shape)
+print("b1 shape:", model.b1.shape)
+print("W2 shape:", model.W2.shape)
+print("b2 shape:", model.b2.shape)
+
+total_parameters = (
+    model.W1.size
+    + model.b1.size
+    + model.W2.size
+    + model.b2.size
+)
+
+print("Total parameters:", total_parameters)
+
+# Test sigmoid function
+print("\nSigmoid test:")
+print("Sigmoid(-2):", model.sigmoid(-2))
+print("Sigmoid(0):", model.sigmoid(0))
+print("Sigmoid(2):", model.sigmoid(2))
